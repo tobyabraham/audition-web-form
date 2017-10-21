@@ -26,6 +26,7 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 	public auditionee: string = '';
 	public auditioneeList: Array<string> = [];
 	public slList: Array<string> = [];
+	public newLeaders: Array<string> = [];
 	public myControl: FormControl = new FormControl();
 	public filteredOptions: Observable<string[]>;
 
@@ -85,5 +86,18 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 		this.target.clear();
 		this.judgementList = [];
 		this.putInMyHtml();
+	}
+
+	public handleTyping(event : any) {
+		this.newLeaders = event.target.value.split('\n');
+	}
+
+	public addLeaders() {
+		for (let i = 0; i < this.newLeaders.length; i++) {
+			if (this.newLeaders[i].length === 0) {
+				continue;
+			}
+			this.db.object(`Trumpets/Student Leaders/${this.newLeaders[i]}`).set(this.newLeaders[i]);
+		}
 	}
 }
