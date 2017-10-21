@@ -28,6 +28,7 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 	public slList: Array<string> = [];
 	public newLeaders: Array<string> = [];
 	public oldLeaders: Array<string> = [];
+	public oldAuditionees: Array<string> = [];
 	public myControl: FormControl = new FormControl();
 	public filteredOptions: Observable<string[]>;
 
@@ -82,7 +83,7 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 			this.db.list('Trumpets/Comments/' + this.auditionee + '/' + instance.getGoodOrBad()).push(newJudgement);
 		}
 		if (this.newAuditionee(this.auditionee)) {
-			this.db.list('Trumpets/Auditionees').push(this.auditionee);
+			this.db.object(`Trumpets/Auditionees/${this.auditionee}`).set(this.auditionee);
 		}
 		this.target.clear();
 		this.judgementList = [];
@@ -92,6 +93,7 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 	public handleTyping(event : any) {
 		this.newLeaders = event.target.value.split('\n');
 		this.oldLeaders = event.target.value.split('\n');
+		this.oldAuditionees = event.target.value.split('\n');
 	}
 
 	public addLeaders() {
@@ -126,5 +128,15 @@ Vincent Maggioli
 
 	public removeAllLeaders() {
 		this.db.object('Trumpets/Student Leaders/').remove();
+	}
+
+	public removeAuditionees() {
+		for (let i = 0; i < this.oldAuditionees.length; i++) {
+			this.db.object(`Trumpets/Auditionees/${this.oldAuditionees[i]}`).remove();
+		}
+	}
+
+	public removeAllAuditionees() {
+		this.db.object('Trumpets/Auditionees/').remove();
 	}
 }

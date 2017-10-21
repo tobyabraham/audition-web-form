@@ -24,10 +24,12 @@
 
 	<br><br>
 	<mat-form-field>
-		<textarea matInput id="newsllist" (keyup)="handleTyping($event)" placeholder="Enter list SLs to add or remove" style="min-height:175px;max-width:500px"></textarea>
+		<textarea matInput id="newlist" (keyup)="handleTyping($event)" placeholder="Enter list SLs to add or remove" style="min-height:175px;max-width:500px"></textarea>
 	</mat-form-field>
 	<br><br>
 	<button mat-button (click)="addLeaders()">Add leaders</button>
 	<button mat-button (click)="removeLeaders()">Remove leaders</button>
-	<button mat-button (click)="removeAllLeaders()">Remove all</button>
+	<button mat-button (click)="removeAllLeaders()">Remove all leaders</button>
+	<button mat-button (click)="removeAuditionees()">Remove auditionees</button>
+	<button mat-button (click)="removeAllAuditionees()">Remove all auditionees</button>
 </div>
