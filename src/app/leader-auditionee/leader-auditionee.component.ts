@@ -28,6 +28,7 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 	public slList: Array<string> = [];
 	public newLeaders: Array<string> = [];
 	public oldLeaders: Array<string> = [];
+	public newAuditionees: Array<string> = [];
 	public oldAuditionees: Array<string> = [];
 	public myControl: FormControl = new FormControl();
 	public filteredOptions: Observable<string[]>;
@@ -93,19 +94,11 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 	public handleTyping(event : any) {
 		this.newLeaders = event.target.value.split('\n');
 		this.oldLeaders = event.target.value.split('\n');
+		this.newAuditionees = event.target.value.split('\n');
 		this.oldAuditionees = event.target.value.split('\n');
 	}
 
-	public addLeaders() {
-		for (let i = 0; i < this.newLeaders.length; i++) {
-			if (this.newLeaders[i].length === 0) {
-				continue;
-			}
-			this.db.object(`Trumpets/Student Leaders/${this.newLeaders[i]}`).set(this.newLeaders[i]);
-		}
-	}
-
-	/** In case I'm an idiot and clear the database again
+/** In case I'm an idiot and clear the database again
 Alex Konopacki
 Alex Lee
 Bobby Belzeski
@@ -118,7 +111,16 @@ Nick Iavagnilio
 Ryan Bever
 Tim Walther
 Vincent Maggioli
-	 */
+*/
+
+	public addLeaders() {
+		for (let i = 0; i < this.newLeaders.length; i++) {
+			if (this.newLeaders[i].length === 0) {
+				continue;
+			}
+			this.db.object(`Trumpets/Student Leaders/${this.newLeaders[i]}`).set(this.newLeaders[i]);
+		}
+	}
 
 	public removeLeaders() {
 		for (let i = 0; i < this.oldLeaders.length; i++) {
@@ -128,6 +130,25 @@ Vincent Maggioli
 
 	public removeAllLeaders() {
 		this.db.object('Trumpets/Student Leaders/').remove();
+	}
+
+/**
+Amanda Laurent
+Jillian Hestle
+Kai Hoffman
+Leigh Witek
+Meredith Roe
+Natalie Miller
+Taylor Duffy
+ */
+
+	public addAuditionees() {
+		for (let i = 0; i < this.newAuditionees.length; i++) {
+			if (this.newAuditionees[i].length === 0) {
+				continue;
+			}
+			this.db.object(`Trumpets/Auditionees/${this.newAuditionees[i]}`).set(this.newAuditionees[i]);
+		}
 	}
 
 	public removeAuditionees() {
