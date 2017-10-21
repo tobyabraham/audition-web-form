@@ -27,6 +27,7 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 	public auditioneeList: Array<string> = [];
 	public slList: Array<string> = [];
 	public newLeaders: Array<string> = [];
+	public oldLeaders: Array<string> = [];
 	public myControl: FormControl = new FormControl();
 	public filteredOptions: Observable<string[]>;
 
@@ -90,6 +91,7 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 
 	public handleTyping(event : any) {
 		this.newLeaders = event.target.value.split('\n');
+		this.oldLeaders = event.target.value.split('\n');
 	}
 
 	public addLeaders() {
@@ -99,5 +101,30 @@ export class LeaderAuditioneeComponent implements AfterViewInit, OnInit {
 			}
 			this.db.object(`Trumpets/Student Leaders/${this.newLeaders[i]}`).set(this.newLeaders[i]);
 		}
+	}
+
+	/** In case I'm an idiot and clear the database again
+Alex Konopacki
+Alex Lee
+Bobby Belzeski
+Cassie McKee
+Colin Milhaupt
+JC McCaw
+Jeremy Weinstock
+Kristin Darling
+Nick Iavagnilio
+Ryan Bever
+Tim Walther
+Vincent Maggioli
+	 */
+
+	public removeLeaders() {
+		for (let i = 0; i < this.oldLeaders.length; i++) {
+			this.db.object(`Trumpets/Student Leaders/${this.oldLeaders[i]}`).remove();
+		}
+	}
+
+	public removeAllLeaders() {
+		this.db.object('Trumpets/Student Leaders/').remove();
 	}
 }
