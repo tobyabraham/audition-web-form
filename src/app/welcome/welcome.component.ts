@@ -8,7 +8,7 @@ import { CommentsService } from '../shared/comments.service';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
-
+import { MatCardModule } from '@angular/material';
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html'
